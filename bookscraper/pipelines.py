@@ -54,7 +54,7 @@ class JsonPipeline(object):
 class CsvPipeline(object):
     def __init__(self):
         self.file = open("booksdata.csv", 'wb')
-        self.exporter = CsvItemExporter(self.file, unicode)
+        self.exporter = CsvItemExporter(self.file, str)
         self.exporter.start_exporting()
 
     def close_spider(self, spider):
