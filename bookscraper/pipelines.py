@@ -29,7 +29,7 @@ class StockPipeline(object):
     max_stock = 5
 
     def process_item(self, item, spider):
-        stock = int(filter(str.isdigit, str(item["stock"])))
+        stock = int(''.join(list(filter(str.isdigit, str(item["stock"])))))
         if stock > self.max_stock:
             raise DropItem("More than 5 available here:" % item)
         else:
@@ -68,7 +68,7 @@ class CsvPipeline(object):
 
     def create_valid_csv(self, item):
         for key, value in item.items():
-            is_string = (isinstance(value, basestring))
+            is_string = (isinstance(value, str))
 
-            if (is_string and ("," in value.encode('utf-8'))):
+            if (is_string and ("," in value)):
                 item[key] = "\"" + value + "\""
